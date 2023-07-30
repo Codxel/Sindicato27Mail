@@ -1,7 +1,7 @@
 Tener instalado Python 3.10 o su ultima versión
 
 Instalar los siguientes paquetes:
-pip install psycopg2
+pip install psycopg2-binary
 pip install tldextract
 pip install matplotlib
 
