@@ -3,22 +3,22 @@ import correo
 import consulta
 
 def procesar_correo(tabla, patron, remitente):
+    # Verificar si el patrón es "*", en cuyo caso se seleccionan todos los registros de la tabla
+    if patron == '*':
+        consulta_listar = f"SELECT * FROM {tabla}"
+    else:
+        # Verificar si el patrón es válido
+        columna, valor = patron.split("=")
+        if not re.fullmatch(r'[a-zA-Z0-9 ]+', valor) or len(valor) < 2:
+            # Si el patrón contiene caracteres no válidos, se envía un correo de error
+            correo.enviar_correo(tabla + "_LISTAR - Error de Búsqueda: '" + patron + "'", 'El patrón de búsqueda es inválido', remitente)
+            return
+
+        # Construir la consulta SQL con la columna y el patrón especificados
+        consulta_listar = f"SELECT * FROM {tabla} WHERE lower({columna}) ILIKE %s"
+        valor = '%' + valor.lower() + '%'
+
     try:
-        # Verificar si el patrón es "*", en cuyo caso se seleccionan todos los registros de la tabla
-        if patron == '*':
-            consulta_listar = f"SELECT * FROM {tabla}"
-        else:
-            # Verificar si el patrón es válido
-            columna, valor = patron.split("=")
-            if not re.fullmatch(r'[a-zA-Z0-9 ]+', valor) or len(valor) < 2:
-                # Si el patrón contiene caracteres no válidos, se envía un correo de error
-                correo.enviar_correo(tabla + "_LISTAR - Error de Búsqueda: '" + patron + "'", 'El patrón de búsqueda es inválido', remitente)
-                return
-
-            # Construir la consulta SQL con la columna y el patrón especificados
-            consulta_listar = f"SELECT * FROM {tabla} WHERE lower({columna}) ILIKE %s"
-            valor = '%' + valor.lower() + '%'
-
         # Ejecutar la consulta y obtener los resultados
         resultados = consulta.ejecutar_consulta(consulta_listar, [valor])
 

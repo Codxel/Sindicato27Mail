@@ -6,7 +6,15 @@ def procesar_correo(tabla, eliminar_id, remitente):
     # Verificar si el ID contiene solo números
     if not re.fullmatch(r'^\d+$', eliminar_id):
         correo.enviar_correo(tabla + "_ELIMINAR - Error al Eliminar: '" + eliminar_id + "'", 'El ID solo debe contener números', remitente)
-    else:
+    else:       
+        # Verificar si el id_valor existe en la base de datos
+        consulta_existe = f"SELECT id FROM {tabla} WHERE id = %s"
+        id_existe = consulta.ejecutar_consulta(consulta_existe, [eliminar_id])
+        if not id_existe:
+            error = f"El ID {eliminar_id} no existe en la tabla {tabla}"
+            correo.enviar_correo(tabla + "_ELIMINAR - Error al eliminar: '" + eliminar_id + "'", error, remitente)
+            return
+        
         # Construir la consulta SQL de eliminación
         consulta_eliminar = "DELETE FROM " + tabla + " WHERE id = %s"
 
