@@ -20,7 +20,7 @@ print("CONEXIÓN EXITOSA, ESPERANDO CORREOS.")
 # Procesar los mensajes nuevos
 while True:
     # Esperar un período de tiempo antes de verificar si hay mensajes nuevos
-    time.sleep(2)
+    # time.sleep(2)
 
     # Establecer una nueva conexión con el servidor de correo
     correo_pop3 = poplib.POP3(SERVIDOR, PUERTO_POP)

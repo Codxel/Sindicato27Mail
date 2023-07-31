@@ -11,7 +11,7 @@ def ejecutar_consulta(query, params):
             rows = cur.fetchall()
             cur.close()
             conn.close()
-            return rows  # Devuelve los resultados de la consulta SELECT
+            return rows  # Devuelve los resultados de la consulta
         else:
             cur.close()
             conn.close()

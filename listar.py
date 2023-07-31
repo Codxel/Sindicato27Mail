@@ -6,6 +6,7 @@ def procesar_correo(tabla, patron, remitente):
     # Verificar si el patrón es "*", en cuyo caso se seleccionan todos los registros de la tabla
     if patron == '*':
         consulta_listar = f"SELECT * FROM {tabla}"
+        valor = ''
     else:
         # Verificar si el patrón es válido
         columna, valor = patron.split("=")

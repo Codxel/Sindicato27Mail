@@ -6,10 +6,10 @@ def generar_grafica(datos, nombres):
     # Crear la gráfica utilizando la biblioteca Matplotlib
     etiquetas = [f'{nombres[i].replace("  ", "")}: {datos[i]}' for i in range(len(datos))]  # Construir las etiquetas de la gráfica con los nombres y los datos
     plt.pie(datos, labels=etiquetas, autopct='%1.1f%%')  # Utilizar las etiquetas en la gráfica
-    plt.title('Gráfica')  # Establecer un título para la gráfica
+    plt.title('Gráfica')
     imagen_grafica = 'grafica.png'
-    plt.savefig(imagen_grafica)  # Guardar la gráfica sin mostrarla en una ventana
-    plt.close()  # Cerrar la figura para liberar memoria
+    plt.savefig(imagen_grafica)
+    plt.close()
     return imagen_grafica
 
 def procesar_correo(tabla, columna, remitente):    
