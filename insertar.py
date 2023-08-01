@@ -10,7 +10,7 @@ def procesar_correo(tabla, valores, remitente):
     # Verificar si el número de datos en valores coincide con el número de columnas modificables en la tabla
     lista_valores = valores.split(',')
     if len(lista_valores) != len(columnas_modificables):
-        error = f"El número de datos no coincide con el número de columnas modificables de la tabla {tabla} ({', '.join(columnas_modificables)})\nTome en cuenta que si lleva espacios debe colocar el dato entre comillas, ejemplo: 'dato con espacio'"
+        error = f"El número de datos no coincide con el número de columnas modificables de la tabla {tabla} [{', '.join(columnas_modificables)}]\nTome en cuenta que si lleva espacios debe colocar el dato entre comillas, ejemplo: 'dato con espacio'"
         correo.enviar_correo(tabla + "_INSERTAR - Error al insertar registros: '" + valores + "'", error, remitente)
     else:
         try:
