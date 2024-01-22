@@ -12,9 +12,8 @@ def ejecutar_consulta(query, params):
             cur.close()
             conn.close()
             return rows  # Devuelve los resultados de la consulta
-        else:
-            cur.close()
-            conn.close()
-            return
+        cur.close()
+        conn.close()
+        return
     except Exception as e:
         raise Exception(f'Ocurrió un error al ejecutar la consulta: {str(e)}')
